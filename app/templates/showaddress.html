@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}FlipKart | Select Address{% endblock %}
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Select an Address for Payment</h1>
+    <form method="POST" class="mb-4">
+        {% csrf_token %}
+        
+        <div class="list-group">
+            {% for a in addresses %}
+                <div class="list-group-item list-group-item-action">
+                    <input type="radio" id="a_{{ a.id }}" name="selected_address_id" value="{{ a.id }}" required>
+                    <label for="a_{{ a.id }}" class="ml-2">
+                        <strong>Address:</strong> {{ a.addr }} <br>
+                        <strong>Pincode:</strong> {{ a.pincode }} <br>
+                        <strong>Contact:</strong> {{ a.contactnum }}
+                    </label>
+                </div>
+            {% empty %}
+                <div class="alert alert-warning">
+                    No saved addresses found!
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Proceed to Payment Button -->
+         <a href="/make_payment">
+        <button type="submit" class="btn btn-danger btn-block mt-3">Proceed to Payment</button>
+        </a>
+    </form>
+
+    <!-- Action Buttons -->
+    <div class="text-center">
+        <a href="/showcarts" class="btn btn-success mr-2">Cancel</a>
+        <a href="/addaddress" class="btn btn-primary">Add a New Address</a>
+    </div>
+</div>
+{% endblock %}

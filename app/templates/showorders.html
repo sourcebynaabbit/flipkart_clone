@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}FlipKart|Orders{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h2 class="text-center">My Orders</h2>
+        {% if orders %}
+        <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>OrderID</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for x in orders %}
+            <tr>
+                <td>{{x.orderid}}</td>
+                <td>{{x.productid.productname}}</td>
+                <th>{{x.qty}}</th>
+                <th>{{x.productid.price}}</th>
+                <th></th>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+        {% else %}
+        <h2 class="text-center bg-danger">You have no order yet</h2>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
